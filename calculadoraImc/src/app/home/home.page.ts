@@ -17,9 +17,24 @@ export class HomePage {
     return !(this.weight && this.height && this.weight > 0 && this.height > 0);
   }
 
+  ImcDegreeCalculate(IMC: number){
+    if (IMC < 18.5){
+      return 'MAGREZA';
+    } else if (IMC < 25){
+      return 'NORMAL';
+    } else if (IMC < 30) {
+      return 'SOBREPESO';
+    } else if (IMC < 40){
+      return 'OBESIDADE';
+    } else {
+      return 'OBESIDADE GRAVE';
+    }
+  }
+
   onCalculate(){
     const IMC = this.weight / (this.height * this.height);
-    this.showMessage(`IMC = ${IMC.toFixed(2)}`)
+    const degree = this.ImcDegreeCalculate(IMC);
+    this.showMessage(`IMC = ${IMC.toFixed(2)}   -   ${degree}`)
   }
 
   async showMessage(msg: string){
